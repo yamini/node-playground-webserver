@@ -2,6 +2,9 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+// configure to use environment variable for heroku, or 3000 for local app
+const port = process.env.PORT || 3000;
+
 var app = express();
 
 //register partials directory
@@ -68,7 +71,8 @@ app.get('/', (req, res) => {
 //about route
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
-        pageTitle: 'About Page'
+        pageTitle: 'About Page',
+        welcomeMessage: 'About my Website'
     });
 });
 
@@ -79,6 +83,6 @@ app.get('/bad', (req, res) => {
     });
 });
 
-app.listen(3000, () => {
-    console.log('Server is up on port 3000');
+app.listen(port, () => {
+    console.log(`Server is up on port ${port}`);
 });
